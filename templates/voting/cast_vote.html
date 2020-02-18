@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}
+  <title>Voting Page</title>
+{% endblock %}
+
+{% block body_block %}
+{% if vote_status %}
+<div class="jumbotron">
+  <h1>You Have Already Casted the Vote</h1>
+</div>
+{% else %}
+<div class="jumbotron">
+  Select Candidate and Click on Vote
+  <form method="POST">
+      {% csrf_token %}
+      {% if candidates %}
+      Candidate_name : <select name="cand_name" id="cand_name">
+        {% for candidate in candidates %}
+        <option value="{{candidate}}">{{candidate}}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Vote">
+      {% else %}
+        <h1>No Candidates Are Contesting Election</h1>
+      {% endif %}
+      
+      
+  </form>
+</div>
+{% endif %}
+
+{% endblock %}
